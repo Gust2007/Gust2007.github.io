@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.logo {
+    height: 100vh;
+    background: linear-gradient(#1B273D, #11192C);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: auto;
+    height: auto;
+    max-width: 50%;
+    max-height: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.meta-img {
+    width: 100%;
+}
+
+.card {
+    border: 1px solid black;
+    max-width: 500px;
+    padding: 10px;
+}
+
+.card h2 {
+    text-align: center;
+    background-color: bisque;
+}

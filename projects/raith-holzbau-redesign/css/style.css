@@ -1,0 +1,304 @@
+/* ============== */
+/* === Core CSS === */
+/* ============== */
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: arial, serif;
+	font-weight: lighter;
+	font-size: 15px;
+	line-height: 150%;
+	color: #603913;
+	background: transparent url("../assets/bg.jpg") center bottom repeat-x;
+	height: 100%;
+}
+a:link, a:visited {
+	text-decoration: none;
+	font-weight: normal;
+	color: #8dc63f;
+}
+a:hover {
+	font-weight: normal;
+	color: #603913;
+}
+a:focus {
+	outline: 0;
+}
+img {
+	border: 0 none;
+}
+ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+/* ==================== */
+/* === Template CSS === */
+/* ==================== */
+#body {
+	width: 954px;
+	margin: 0 auto;
+}
+
+/* ============== */
+/* === Top CSS === */
+/* ============== */
+#top {
+	width: 954px;
+	margin-top: 5px;
+	position: relative;
+}
+
+#logo {
+	display: block;
+	position: relative;
+	width: 954px;
+	height: 135px;
+	margin-top: 3px;
+}
+
+#logo a {
+	display: block;
+	width: 954px;
+	height: 135px;
+	background: transparent url("../assets/logo.jpg") center 0 no-repeat;
+}
+#logo a:hover {
+	background: transparent url("../assets/logo_h.jpg") center 0 no-repeat;
+}
+
+/* ============== */
+/* === Nav CSS === */
+/* ============== */
+#navi {
+	width: 318px;
+	height: 167px;
+	padding-top: 151px;
+	float: left;
+	background-color: #603913;
+	position: relative;
+}
+#fb {
+	position: absolute;
+	display: block;
+	width: 50px;
+	height: 50px;
+	top: 10px;
+	right: 10px;
+}
+#fb a {
+	display: block !important;
+	width: 50px !important;
+	height: 50px !important;
+	background: transparent url("../assets/fb.png") 0 0 no-repeat;
+}
+#banner {
+	width: 636px;
+	height: 318px;
+	float: left;
+	background: transparent url("../assets/dachstuhl.jpg") center bottom no-repeat;
+}
+
+#navi ul {
+	list-style: none;
+}
+
+#navi li {
+	float: right;
+}
+
+#navi a {
+	display: block;
+	color: #fff;
+	width: 300px;
+	height: 33px;
+	padding-right: 10px;
+	padding-left: 7px;
+	font-size: 27px;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: right;
+	text-transform: uppercase;
+}
+
+#navi a:hover {
+	color: #8dc63f;
+}
+#navi .active a {
+	color: #8dc63f;
+}
+
+/* ============== */
+/* === Box CSS === */
+/* ============== */
+.box {
+	width: 278px;
+	height: 108px;
+	float: left;
+	padding: 20px;
+	padding-top: 189px;
+	color: #fff;
+	line-height: 18px;
+	font-size: 17px;
+	text-align: justify;
+}
+.box h4 a {
+	color: #fff;
+	font-size: 24px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 5px 0;
+}
+.box h4 {
+	height: 25px;
+}
+.box .readmore {
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	float: right;
+	color: #fff;
+	padding-right: 35px;
+	background: transparent url("../assets/readmore.png") right 0 no-repeat;
+}
+.box .readmore:hover {
+	background: transparent url("../assets/readmore_h.png") right 0 no-repeat;
+}
+#box_1 {
+	background: transparent url("../assets/bg_leistungen.jpg") no-repeat;
+}
+#box_2 {
+	background: transparent url("../assets/bg_galerie.jpg") no-repeat;
+}
+#box_3 {
+	background: transparent url("../assets/bg_kontakt.jpg") no-repeat;
+}
+
+/* ================= */
+/* === Center CSS === */
+/* ================= */
+#center {
+	width: 954px;
+}
+
+#left {
+	width: 318px;
+	float: left;
+}
+
+#left .box {
+	padding-top: 15px;
+}
+
+#content {
+	width: 621px;
+	padding: 15px;
+	padding-right: 0px;
+	float: left;
+}
+
+#content li {
+	background: transparent url("../assets/list-icon.png") 0 6px no-repeat;
+	padding: 3px 0 12px 24px;
+}
+
+#content p {
+	padding: 4px 0;
+	text-align: justify;
+}
+
+/* ================= */
+/* === Footer CSS === */
+/* ================= */
+#footer {
+	font-size: 11px;
+	text-align: justify;
+	padding: 5px 0;
+	margin-bottom: 44px;
+}
+#footer ul {
+	width: 400px;
+	margin-left: 595px;
+}
+#footer li {
+	float: left;
+	display: block;
+	padding-left: 19px;
+	height: 17px;
+	text-align: right;
+}
+#footer a {
+	color: #603913;
+	font-size: 13px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+#footer a:hover {
+	color: #8dc63f;
+}
+
+/* ================ */
+/* === Other CSS === */
+/* ================ */
+.clear {
+	clear: both;
+}
+
+.contentpaneopen {
+	width: 100%;
+}
+
+h1 {
+	color: #8dc63f;
+	font-size: 42px;
+	margin: 10px 0;
+	padding: 20px 0;
+}
+h2 {
+	color: #603913;
+	padding: 20px 0;
+}
+h3 {
+	color: #8dc63f;
+	margin-top: 8px;
+}
+h4 {
+	color: #603913;
+}
+h5 {
+	color: #8dc63f;
+}
+#preload {
+	display: none;
+}
+
+#home_left {
+	width: 460px;
+	padding-right: 17px;
+	float: left;
+	text-align: justify;
+}
+#home_right {
+	width: 477px;
+	float: left;
+	text-align: justify;
+}
+#map {
+	width: 621px;
+	height: 400px;
+}
+#galerie img {
+	margin: 4px 8px 0 0;
+	float: left;
+}
+
+/* Table row coloring (replaces jQuery) */
+.colored tr:nth-child(even) {
+	background: #488dc6;
+}
+.colored tr:nth-child(odd) {
+	background: #63b0de;
+}

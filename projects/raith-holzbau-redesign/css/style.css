@@ -322,6 +322,9 @@ ul {
 #footer a:hover {
 	color: var(--color-accent);
 }
+#footer .active a {
+	color: var(--color-accent);
+}
 
 /* ================ */
 /* === Other CSS === */
@@ -517,5 +520,27 @@ h5 {
 	#footer li {
 		padding: var(--space-xs) 0;
 		height: auto;
+	}
+	/* Override inline float on content images for mobile */
+	#content img {
+		float: none !important;
+		display: block;
+		margin: 1em 0;
+	}
+	/* Gallery images: stack on very narrow screens */
+	#galerie img {
+		float: none;
+		display: inline-block;
+		margin: 4px 4px 4px 0;
+		vertical-align: top;
+	}
+	/* Prevent horizontal overflow from long content */
+	#content {
+		overflow-wrap: break-word;
+	}
+	/* Hamburger keyboard focus */
+	.nav-toggle-label:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
 	}
 }

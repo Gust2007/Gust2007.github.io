@@ -27,12 +27,18 @@
 	--radius-sm: 4px;
 	--radius-md: 8px;
 	--shadow-sm: 0 1px 3px rgba(96, 57, 19, 0.12);
+
+	/* Layout */
+	--container-max: 954px;
+	--breakpoint-mobile: 768px;
+	--breakpoint-tablet: 1024px;
 }
 
 /* ============== */
 /* === Core CSS === */
 /* ============== */
 * {
+	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
@@ -60,6 +66,8 @@ a:focus {
 }
 img {
 	border: 0 none;
+	max-width: 100%;
+	height: auto;
 }
 ul {
 	margin: 0;
@@ -71,15 +79,18 @@ ul {
 /* === Template CSS === */
 /* ==================== */
 #body {
-	width: 954px;
+	max-width: var(--container-max);
+	width: 100%;
 	margin: 0 auto;
+	padding: 0 var(--space-md);
 }
 
 /* ============== */
 /* === Top CSS === */
 /* ============== */
 #top {
-	width: 954px;
+	display: flex;
+	width: 100%;
 	margin-top: 5px;
 	position: relative;
 }
@@ -87,29 +98,33 @@ ul {
 #logo {
 	display: block;
 	position: relative;
-	width: 954px;
-	height: 135px;
-	margin-top: 3px;
+	width: 100%;
+	max-width: var(--container-max);
+	margin: 3px auto 0;
+	height: 0;
+	padding-bottom: 14.15%; /* 135/954 */
 }
 
 #logo a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	display: block;
-	width: 954px;
-	height: 135px;
-	background: transparent url("../assets/logo.jpg") center 0 no-repeat;
+	background: transparent url("../assets/logo.jpg") center top / contain no-repeat;
 }
 #logo a:hover {
-	background: transparent url("../assets/logo_h.jpg") center 0 no-repeat;
+	background: transparent url("../assets/logo_h.jpg") center top / contain no-repeat;
 }
 
 /* ============== */
 /* === Nav CSS === */
 /* ============== */
 #navi {
-	width: 318px;
-	height: 167px;
+	flex: 0 0 33.33%; /* 318/954 */
+	min-height: 167px;
 	padding-top: 151px;
-	float: left;
 	background-color: var(--color-primary);
 	position: relative;
 }
@@ -128,18 +143,20 @@ ul {
 	background: transparent url("../assets/fb.png") 0 0 no-repeat;
 }
 #banner {
-	width: 636px;
-	height: 318px;
-	float: left;
-	background: transparent url("../assets/dachstuhl.jpg") center bottom no-repeat;
+	flex: 1 1 66.67%; /* 636/954 */
+	aspect-ratio: 636 / 318;
+	background: transparent url("../assets/dachstuhl.jpg") center bottom / cover no-repeat;
 }
 
 #navi ul {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
 	list-style: none;
 }
 
 #navi li {
-	float: right;
+	/* no float needed */
 }
 
 #navi a {
@@ -167,11 +184,13 @@ ul {
 /* === Box CSS === */
 /* ============== */
 .box {
-	width: 278px;
-	height: 108px;
-	float: left;
-	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 0;
+	min-width: 0;
+	padding: var(--space-lg);
 	padding-top: 189px;
+	min-height: 108px;
 	color: var(--color-text-on-dark);
 	line-height: 18px;
 	font-size: 17px;
@@ -188,16 +207,16 @@ ul {
 	height: 25px;
 }
 .box .readmore {
-	width: 100px;
+	align-self: flex-end;
+	min-width: 165px;
 	height: 30px;
 	line-height: 30px;
-	float: right;
 	color: var(--color-text-on-dark);
-	padding-right: 35px;
-	background: transparent url("../assets/readmore.png") right 0 no-repeat;
+	padding-right: 36px;
+	background: transparent url("../assets/readmore.png") right center no-repeat;
 }
 .box .readmore:hover {
-	background: transparent url("../assets/readmore_h.png") right 0 no-repeat;
+	background: transparent url("../assets/readmore_h.png") right center no-repeat;
 }
 #box_1 {
 	background: transparent url("../assets/bg_leistungen.jpg") no-repeat;
@@ -213,23 +232,37 @@ ul {
 /* === Center CSS === */
 /* ================= */
 #center {
-	width: 954px;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	width: 100%;
+	gap: 0;
+}
+
+#boxnavi {
+	grid-column: 1 / -1;
+	display: flex;
+}
+
+#content_home {
+	grid-column: 1 / -1;
 }
 
 #left {
-	width: 318px;
-	float: left;
+	display: flex;
+	flex-direction: column;
 }
 
+/* Sidebar: boxes stack vertically (content pages) */
 #left .box {
+	flex: 0 0 auto;
+	width: 100%;
 	padding-top: 15px;
+	min-height: 120px;
 }
 
 #content {
-	width: 621px;
-	padding: 15px;
-	padding-right: 0px;
-	float: left;
+	padding: var(--space-md);
+	padding-right: 0;
 }
 
 #content li {
@@ -252,15 +285,18 @@ ul {
 	margin-bottom: 44px;
 }
 #footer ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 var(--space-md);
 	width: 400px;
-	margin-left: 595px;
+	margin-left: auto;
+	margin-right: 0;
+	justify-content: flex-end;
 }
 #footer li {
-	float: left;
 	display: block;
-	padding-left: 19px;
+	padding-left: 0;
 	height: 17px;
-	text-align: right;
 }
 #footer a {
 	color: var(--color-primary);
@@ -307,19 +343,25 @@ h5 {
 	display: none;
 }
 
+#content_home > div:nth-child(2) {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 var(--space-md);
+}
 #home_left {
-	width: 460px;
-	padding-right: 17px;
-	float: left;
+	flex: 1 1 460px;
+	min-width: 0;
+	padding-right: var(--space-md);
 	text-align: justify;
 }
 #home_right {
-	width: 477px;
-	float: left;
+	flex: 1 1 477px;
+	min-width: 0;
 	text-align: justify;
 }
 #map {
-	width: 621px;
+	width: 100%;
+	max-width: 621px;
 	height: 400px;
 }
 #galerie img {
@@ -333,4 +375,74 @@ h5 {
 }
 .colored tr:nth-child(odd) {
 	background: var(--color-table-odd);
+}
+
+/* ================= */
+/* === Responsive === */
+/* ================= */
+@media (max-width: 768px) {
+	#top {
+		flex-direction: column;
+	}
+	#navi {
+		flex: 1 1 auto;
+		width: 100%;
+		min-height: auto;
+		padding-top: var(--space-lg);
+		padding-bottom: var(--space-lg);
+	}
+	#navi ul {
+		align-items: flex-start;
+	}
+	#navi a {
+		width: auto;
+		height: auto;
+		padding: var(--space-xs) var(--space-md);
+		font-size: 1.1rem;
+		text-align: left;
+	}
+	#banner {
+		width: 100%;
+		aspect-ratio: 636 / 318;
+	}
+	#center {
+		grid-template-columns: 1fr;
+	}
+	#left {
+		order: 1;
+	}
+	#content {
+		order: 2;
+	}
+	#boxnavi {
+		flex-direction: column;
+	}
+	.box {
+		flex: 0 0 auto;
+		width: 100%;
+		padding-top: var(--space-lg);
+		min-height: auto;
+	}
+	#boxnavi .box {
+		padding-top: var(--space-lg);
+	}
+	#content_home > div:nth-child(2) {
+		flex-direction: column;
+	}
+	#home_left,
+	#home_right {
+		flex: 0 0 auto;
+		width: 100%;
+		padding-right: 0;
+	}
+	#footer ul {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+		justify-content: flex-start;
+	}
+	#footer li {
+		padding: var(--space-xs) 0;
+		height: auto;
+	}
 }

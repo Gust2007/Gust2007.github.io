@@ -148,36 +148,51 @@ ul {
 	background: transparent url("../assets/dachstuhl.jpg") center bottom / cover no-repeat;
 }
 
+/* Mobile nav toggle (hidden on desktop) */
+.nav-toggle {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+.nav-toggle-label {
+	display: none;
+}
+
 #navi ul {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
 	list-style: none;
+	gap: 2px;
 }
 
 #navi li {
-	/* no float needed */
+	width: 100%;
 }
 
 #navi a {
 	display: block;
 	color: var(--color-text-on-dark);
-	width: 300px;
-	height: 33px;
-	padding-right: 10px;
-	padding-left: 7px;
-	font-size: 27px;
-	font-weight: bold;
+	padding: var(--space-sm) var(--space-md);
+	padding-right: var(--space-lg);
+	font-size: 1.05rem;
+	font-weight: 600;
 	text-decoration: none;
 	text-align: right;
 	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	transition: color 0.2s ease;
 }
 
 #navi a:hover {
 	color: var(--color-accent);
 }
+#navi a:focus {
+	outline-color: var(--color-text-on-dark);
+}
 #navi .active a {
 	color: var(--color-accent);
+	border-right: 3px solid var(--color-accent);
 }
 
 /* ============== */
@@ -388,17 +403,75 @@ h5 {
 		flex: 1 1 auto;
 		width: 100%;
 		min-height: auto;
-		padding-top: var(--space-lg);
-		padding-bottom: var(--space-lg);
-	}
-	#navi ul {
+		padding-top: var(--space-md);
+		padding-bottom: var(--space-md);
+		display: flex;
+		flex-wrap: wrap;
 		align-items: flex-start;
+		gap: var(--space-md);
+	}
+	/* Hamburger button */
+	.nav-toggle-label {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		width: 44px;
+		height: 44px;
+		padding: 10px;
+		cursor: pointer;
+		background: transparent;
+		border: none;
+	}
+	.nav-toggle-label::before,
+	.nav-toggle-label::after {
+		content: "";
+		display: block;
+		width: 24px;
+		height: 2px;
+		background: var(--color-text-on-dark);
+		transition: transform 0.2s ease, opacity 0.2s ease;
+	}
+	.nav-toggle-label span {
+		display: block;
+		width: 24px;
+		height: 2px;
+		background: var(--color-text-on-dark);
+		transition: opacity 0.2s ease;
+	}
+	.nav-toggle-label::before {
+		transform: translateY(-7px);
+	}
+	.nav-toggle-label::after {
+		transform: translateY(5px);
+	}
+	#nav-toggle:checked ~ .nav-toggle-label::before {
+		transform: translateY(2px) rotate(45deg);
+	}
+	#nav-toggle:checked ~ .nav-toggle-label::after {
+		transform: translateY(-2px) rotate(-45deg);
+	}
+	#nav-toggle:checked ~ .nav-toggle-label span {
+		opacity: 0;
+	}
+	/* Collapsible nav menu */
+	#navi ul {
+		display: none;
+		width: 100%;
+		align-items: flex-start;
+		padding-top: var(--space-sm);
+	}
+	#nav-toggle:checked ~ ul {
+		display: flex;
+	}
+	#navi .active a {
+		border-right: none;
+		border-left: 3px solid var(--color-accent);
 	}
 	#navi a {
-		width: auto;
-		height: auto;
-		padding: var(--space-xs) var(--space-md);
-		font-size: 1.1rem;
+		width: 100%;
+		padding: var(--space-sm) var(--space-md);
+		font-size: 1rem;
 		text-align: left;
 	}
 	#banner {

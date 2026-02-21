@@ -1,96 +1,145 @@
 ---
-name: Modernize Raith Holzbau UI
-overview: Iteratively modernize the site’s look (layout, typography, colors, responsiveness) while preserving all existing texts and images. Start with low-risk CSS tokenization + responsive layout, then progressively upgrade header/nav, page layouts, and components across all 10 pages.
+
+## name: Modernize Raith Holzbau UI
+overview: Iteratively modernize the site's look (layout, typography, colors, responsiveness) while preserving all existing texts and images. Driven by the "Warm Craftsman Editorial" aesthetic direction.
+
+## Aesthetic direction — "Warm Craftsman Editorial"
+
+Four generations of precision woodworking. The design should feel like a master craftsman's trade catalogue: warm, authoritative, precise. Not rustic kitsch, not corporate sterile.
+
+
+| Token               | Decision                     | Rationale                                             |
+| ------------------- | ---------------------------- | ----------------------------------------------------- |
+| Background          | Aged paper cream `#f7f3ec`   | Warmth over cold white; feels printed                 |
+| Text                | Deep warm charcoal `#1e1a14` | Better readability than brown                         |
+| Nav background      | Deep espresso `#1c1510`      | Authority without the chocolate-brown kitsch          |
+| Primary accent      | Forest green `#3b6934`       | Mature, serious — not the old lime `#8dc63f`          |
+| Hover/active accent | Amber `#b5762e`              | Wood-tone warmth; pairs with the craft theme          |
+| Heading font        | Playfair Display (serif)     | Editorial, crafted — the most impactful single change |
+| Body font           | Source Sans 3                | Clean, readable, no-nonsense                          |
+
+
+**The one unforgettable thing**: Playfair Display headings on cream — makes the whole site feel like a quality printed brochure.
+
 ---
+
+## Progress
+
+
+| Phase                                           | Status  | Notes                                                                                    |
+| ----------------------------------------------- | ------- | ---------------------------------------------------------------------------------------- |
+| 0 — Visual baseline + safety net                | Done    | Screenshots in `baseline/`, `TEST_CHECKLIST.md` created                                  |
+| 1 — Design tokens                               | Done    | CSS variables in `:root`, colors replaced, focus styles added                            |
+| 2 — Responsive foundation                       | Done    | Container max-width, breakpoint at 768px, stacked layout, fluid images                   |
+| 3 — Flex/Grid layout                            | Done    | `#top` flex, `#center` grid, `#boxnavi` flex, footer flex                                |
+| 4 — Modern nav                                  | Done    | Small-caps nav, amber active state, mobile hamburger (pure CSS) across all 10 pages      |
+| 5 — Component facelift                          | Done    | Playfair Display + Source Sans 3, new palette, card gradient overlays, typographic scale |
+| 6 — Design showcase (gallery, homepage, motion) | Pending |                                                                                          |
+| 7 — Content-page polish                         | Pending |                                                                                          |
+| 8 — Optional maintainability                    | Pending |                                                                                          |
+
 
 ## Goals and constraints
 
-- **Preserve content**: keep all existing texts and images; only change presentation (layout, spacing, typography, colors) in early phases.
-- **Static hosting**: plain HTML/CSS/JS (no build step); changes must work on GitHub Pages.
-- **Iterative rollout**: make improvements that can ship in small steps without breaking pages.
+- **Preserve content**: keep all existing texts and images; only change presentation (layout, spacing, typography, colors).
+- **Static hosting**: plain HTML/CSS/JS (no build step); must work on GitHub Pages.
+- **Aesthetic intent**: every decision should serve the "Warm Craftsman Editorial" direction, not just generic modernization.
 
-## What’s there today (baseline)
+## What's there today (after Phase 5)
 
-- **10 standalone pages** (duplicate header/nav/footer in each): `index.html`, `ueber-uns.html`, `zimmerei.html`, `kranverleih.html`, `dachsanierung.html`, `leistungen.html`, `galerie.html`, `kontakt.html`, `impressum.html`, `datenschutz.html`.
-- **Single stylesheet**: `css/style.css` using fixed-width + floats (`#body { width: 954px; }`, `#navi/#banner/#left/#content` floated). Colors are hard-coded (`#603913`, `#8dc63f`, etc.) and repeated.
-- **Minimal JS**: `js/scripts.js` for email de-obfuscation.
+- **10 standalone pages** (duplicate header/nav/footer in each).
+- **Single stylesheet** `css/style.css`: Playfair Display + Source Sans 3 from Google Fonts; cream background; espresso nav; forest green + amber accents; Flex/Grid layout; card gradient overlays; mobile hamburger menu.
+- **Minimal JS**: `js/scripts.js` for email de-obfuscation only.
+
+---
 
 ## Modernization strategy (phased)
 
-### Phase 0 — Visual baseline + safety net
+### Phase 0 — Visual baseline + safety net ✓
 
-- Capture “before” screenshots of: home, one content page, gallery, contact, legal.
-- Add a simple manual test checklist: nav works, active state highlights, email renders, images load, page readable on mobile.
+Capture "before" screenshots. Manual test checklist created.
 
-### Phase 1 — Introduce design tokens (no layout rewrite yet)
+### Phase 1 — Design tokens ✓
 
-- In `css/style.css`, add `:root` CSS custom properties for:
-  - **colors** (surface/background/text/accent)
-  - **typography** (font families, base size/line-height)
-  - **spacing + radius + shadow** (to enable modern cards)
-- Replace scattered hex colors with variables.
-- Add modern focus styles (restore accessible focus outlines; currently `a:focus { outline: 0; }`).
+CSS custom properties for colors, typography, spacing, radius, shadow.
 
-### Phase 2 — Responsive foundation (container + breakpoints)
+### Phase 2 — Responsive foundation ✓
 
-- Convert fixed `954px` layout to a **responsive container**:
-  - Use `max-width` + `margin: auto` + fluid padding.
-  - Introduce 2–3 breakpoints (mobile/tablet/desktop).
-- Ensure the existing structure still works, but becomes usable on phones:
-  - Stack sidebar (`#left`) above content (`#content`) on small screens.
-  - Make images fluid (`max-width: 100%`) while keeping proportions.
+Fluid container, 768px breakpoint, stacked mobile layout, fluid images.
 
-### Phase 3 — Replace float layout with Flex/Grid (same markup)
+### Phase 3 — Flex/Grid layout ✓
 
-- Upgrade the main layout to modern CSS:
-  - Header area (`#top`): flex layout for nav block + banner.
-  - Center area (`#center`): CSS Grid for sidebar/content.
-  - Remove reliance on `.clear` for layout.
-- Keep HTML unchanged in this phase to reduce risk (same IDs/classes, new layout rules override old float rules).
+`#top` flex, `#center` grid, footer flex. Float layout removed.
 
-### Phase 4 — Modern header/navigation (small HTML touch, repeated across pages)
+### Phase 4 — Modern navigation ✓
 
-- Refresh nav styling: reduce oversized 27px uppercase, add spacing, hover/focus, and a clearer active state.
-- Add a **mobile nav pattern**:
-  - Minimal JS toggle (or pure-CSS checkbox pattern) to collapse/expand the menu.
-  - Ensure it works across all pages (since header is duplicated).
+Small-caps nav, amber active state, mobile hamburger (pure CSS, no JS), applied across all 10 pages.
 
-### Phase 5 — Component facelift (cards, sections, typography rhythm)
+### Phase 5 — Component facelift ✓
 
-- Convert “boxes” (`.box`, `#box_1..3`) into modern **card components**:
-  - Consistent padding, radius, subtle shadow, improved text contrast.
-  - Preserve existing background images, but adjust overlays/legibility.
-- Improve content readability:
-  - Define consistent spacing between headings/paragraphs/lists.
-  - Set a typographic scale for `h1–h5` using `rem`.
+- **Palette overhaul**: cream surface, espresso nav, deep forest green, amber hover accent.
+- **Typography**: Playfair Display for all headings (h1–h5), Source Sans 3 for body. Fluid `clamp()` sizing for h1/h2.
+- **Card overlays**: cinematic `linear-gradient` via `::after` pseudo-element ensures text legibility over background photos.
+- **Content area**: improved paragraph/list spacing, `text-align: left` replacing `justify`, better line-height.
+- **Footer**: subtle top border, muted link color, spaced letter-tracking.
 
-### Phase 6 — Page-specific refinements (still preserving content)
+### Phase 6 — Design showcase (gallery, homepage, motion)
 
-- **Home** (`index.html`): make the three boxes a responsive card grid; improve hero/banner balance.
-- **Gallery** (`galerie.html`): turn floated thumbnails into a responsive grid; optional lightbox later (no content change).
-- **Contact** (`kontakt.html`): modernize the contact info layout; ensure map container (`#map`) behaves responsively.
-- **Tables** (if present): replace the bright blue row colors with tokenized, brand-appropriate neutrals.
+This is where the site goes from "technically modern" to *memorable*. Each sub-task is driven by the aesthetic direction, not just technical correctness.
 
-### Phase 7 — Optional maintainability upgrade (recommended)
+#### 6a — Gallery: curated photo grid
+
+- Replace floated `<img>` thumbnails with a proper **CSS Grid** multi-column layout.
+- Add a subtle **hover reveal** on each thumbnail (slight scale + brightness lift) using CSS transitions only.
+- Goal: the gallery should feel like a portfolio, not a list of thumbnails.
+
+#### 6b — Homepage: hero moment
+
+- The `#banner` image deserves better treatment: consider adding a tagline or subtle text overlay positioned over the photo.
+- Ensure the three cards (`#boxnavi`) have consistent height and the gradient overlays look intentional.
+- Add a thin decorative rule or section divider between the banner area and the intro text.
+
+#### 6c — Motion pass (CSS only, no JS)
+
+- **Page entry**: short `opacity` + `translateY` fade-in on `#body` using `@keyframes`.
+- **Nav links**: smooth background-color slide on hover (refine existing transition).
+- **Cards**: scale or brightness shift on hover.
+- **Gallery thumbnails**: scale + brightness reveal (see 6a).
+- All animations under 300ms. Wrap in `@media (prefers-reduced-motion: no-preference)` to respect user settings.
+
+#### 6d — Contact page
+
+- Modernize the contact information layout (address, phone, email into a clean block).
+- Ensure `#map` iframe is fully responsive (`width: 100%`, `height` via `clamp` or `aspect-ratio`).
+
+#### 6e — Table styling
+
+- Replace the bright blue row colors (`#488dc6` / `#63b0de`) with brand-appropriate tones via the existing `.colored` class.
+- Warm neutral rows with forest green as the accent for the header row.
+
+### Phase 7 — Content-page polish
+
+Final refinements to individual page layouts not covered in Phase 6:
+
+- `**ueber-uns.html`**: ensure floated team/history image integrates naturally with the new text styling.
+- `**zimmerei.html`, `dachsanierung.html`, `kranverleih.html`, `leistungen.html**`: check heading hierarchy and list spacing on each page individually.
+- `**impressum.html`, `datenschutz.html**`: text-heavy pages benefit most from the typography upgrade; verify line-length and spacing feel comfortable.
+
+### Phase 8 — Optional maintainability upgrade
 
 Because header/footer/sidebar are duplicated in all 10 pages:
 
-- Option A (no tooling): keep duplication but make a “change checklist” for edits across all pages.
-- Option B (light JS includes): load `partials/header.html` + `partials/footer.html` into each page at runtime.
-- Option C (add build tooling later): introduce a small static-site build (only if you want that complexity).
+- **Option A** (no tooling): keep duplication; maintain a change checklist for cross-page edits.
+- **Option B** (light JS includes): load `partials/header.html` + `partials/footer.html` at runtime with `fetch`.
+- **Option C** (build tooling): introduce a small static-site build only if the complexity is wanted.
 
-## Files to touch first
+---
 
-- `css/style.css` — primary modernization work (tokens, responsive, layout, components).
-- `index.html` — verify home-specific layout (`#boxnavi`, `#home_left/#home_right`).
-- One representative subpage like `ueber-uns.html` — validate sidebar + content behavior.
-- Later: apply small repeated header changes across all `.html` files.
+## Definition of done
 
-## Definition of done (for the first modernization iteration)
-
-- Looks modern on mobile + desktop (responsive, no horizontal scrolling).
-- Colors are centralized via CSS variables.
-- Typography and spacing feel consistent.
-- Navigation remains functional with clear active/focus states.
-- No content changes (same text and images, just repositioned/styled).
+- Feels like a quality printed trade catalogue on both desktop and mobile.
+- The gallery is a visual showcase, not a float dump.
+- Animations are present but subtle; `prefers-reduced-motion` is respected.
+- Colors, fonts, and spacing consistently serve the "Warm Craftsman Editorial" direction.
+- All 10 pages pass the `TEST_CHECKLIST.md` manually.
 

@@ -525,6 +525,60 @@ h5 {
 	line-height: 1.75;
 }
 
+/* ================================== */
+/* === Phase 7: Content-page polish === */
+/* ================================== */
+
+/* Floated images inside content — cap width, add radius, consistent margin */
+#content img[style*="float: right"],
+#content img[style*="float:right"] {
+	max-width: 38%;
+	margin-left: var(--space-lg);
+	margin-bottom: var(--space-md);
+	border-radius: var(--radius-sm);
+}
+#content img[style*="float: left"],
+#content img[style*="float:left"] {
+	max-width: 38%;
+	margin-right: var(--space-lg);
+	margin-bottom: var(--space-md);
+	border-radius: var(--radius-sm);
+}
+
+/* h2 spacing when following a paragraph */
+#content h2 {
+	margin-top: var(--space-lg);
+}
+#content h2:first-child {
+	margin-top: 0;
+}
+
+/* List breathing room */
+#content ul,
+#content ol {
+	margin: var(--space-sm) 0 var(--space-lg);
+}
+
+/* Legal pages: comfortable reading width + strong-as-heading */
+.legal-block {
+	max-width: 64ch;
+}
+.legal-block > p {
+	margin-bottom: var(--space-md);
+	line-height: 1.7;
+}
+/* Standalone <strong> used as section headings in privacy policy */
+.legal-block p:has(> strong:only-child) {
+	font-family: var(--font-heading);
+	font-size: 1.05rem;
+	color: var(--color-primary);
+	margin-top: var(--space-xl);
+	margin-bottom: var(--space-xs);
+}
+.legal-block p:has(> strong:only-child) strong {
+	font-weight: 600;
+}
+
 /* Table row coloring (replaces jQuery) */
 .colored tr:nth-child(even) {
 	background: var(--color-table-even);
@@ -703,7 +757,12 @@ h5 {
 	#content img {
 		float: none !important;
 		display: block;
+		max-width: 100% !important;
 		margin: 1em 0;
+	}
+	/* Reset legal-block max-width on mobile */
+	.legal-block {
+		max-width: 100%;
 	}
 	/* Gallery grid: collapse to 2 columns on small screens */
 	#galerie p:has(img) {

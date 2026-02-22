@@ -34,8 +34,8 @@ Four generations of precision woodworking. The design should feel like a master 
 | 3 — Flex/Grid layout                            | Done    | `#top` flex, `#center` grid, `#boxnavi` flex, footer flex                                |
 | 4 — Modern nav                                  | Done    | Small-caps nav, amber active state, mobile hamburger (pure CSS) across all 10 pages      |
 | 5 — Component facelift                          | Done    | Playfair Display + Source Sans 3, new palette, card gradient overlays, typographic scale |
-| 6 — Design showcase (gallery, homepage, motion) | Pending |                                                                                          |
-| 7 — Content-page polish                         | Pending |                                                                                          |
+| 6 — Design showcase (gallery, homepage, motion) | Done    | CSS Grid gallery, page-header accent bar, page fade-in + card/gallery hover, contact card |
+| 7 — Content-page polish                         | Done    | Floated image radius+cap, h2/list spacing, legal-block reading width + strong-headings   |
 | 8 — Optional maintainability                    | Pending |                                                                                          |
 
 

@@ -1,0 +1,80 @@
+---
+interface Props {
+  title: string;
+  /** Key that matches a nav item to set class="active" */
+  activeNav: string;
+}
+
+const { title, activeNav } = Astro.props;
+
+const mainNav = [
+  { href: 'index.html',       label: 'Raith Holzbau', key: 'home'         },
+  { href: 'ueber-uns.html',   label: 'Über uns',      key: 'ueber-uns'    },
+  { href: 'zimmerei.html',    label: 'Zimmerei',       key: 'zimmerei'     },
+  { href: 'kranverleih.html', label: 'Kranverleih',   key: 'kranverleih'  },
+  { href: 'dachsanierung.html', label: 'Lohnabbund',  key: 'dachsanierung'},
+];
+
+const footerNav = [
+  { href: 'kontakt.html',    label: 'Kontakt',    key: 'kontakt'    },
+  { href: 'impressum.html',  label: 'Impressum',  key: 'impressum'  },
+  { href: 'datenschutz.html',label: 'Datenschutz',key: 'datenschutz'},
+];
+
+const pageTitle = title === 'Raith Holzbau'
+  ? 'Raith Holzbau'
+  : `${title} — Raith Holzbau`;
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{pageTitle}</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="favicon.ico" />
+  <slot name="head" />
+</head>
+<body>
+  <div id="preload">
+    <img src="assets/logo_h.jpg" alt="" />
+  </div>
+  <div id="body">
+    <div id="logo"><a href="index.html">&nbsp;</a></div>
+    <div id="top">
+      <div id="navi">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
+        <label for="nav-toggle" class="nav-toggle-label" aria-label="Menü öffnen"><span></span></label>
+        <ul class="nav">
+          {mainNav.map(item => (
+            <li class={activeNav === item.key ? 'active' : undefined}>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+        <div id="fb">
+          <a href="https://de-de.facebook.com/pages/Raith-Holzbau-GmbH-CoKG/203828749636570"
+             target="_blank">&nbsp;</a>
+        </div>
+      </div>
+      <div id="banner"></div>
+    </div>
+
+    <div id="center">
+      <slot />
+    </div>
+
+    <div id="footer">
+      <ul class="nav">
+        {footerNav.map(item => (
+          <li class={activeNav === item.key ? 'active' : undefined}>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <script is:inline src="js/scripts.js"></script>
+</body>
+</html>

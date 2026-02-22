@@ -1,0 +1,29 @@
+---
+/**
+ * Layout for all content pages that have the three-card sidebar on the left
+ * and a main content area on the right.
+ */
+import Base from './Base.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+interface Props {
+  title: string;
+  activeNav: string;
+  /** Extra CSS to inject into <head> (e.g. lightbox stylesheet) */
+  extraClass?: string;
+}
+
+const { title, activeNav } = Astro.props;
+---
+<Base title={title} activeNav={activeNav}>
+  <slot name="head" slot="head" />
+  <Sidebar />
+  <div id="content">
+    <div class="page-header">
+      <h1>{title}</h1>
+    </div>
+    <div>
+      <slot />
+    </div>
+  </div>
+</Base>

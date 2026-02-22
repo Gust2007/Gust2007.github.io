@@ -1,0 +1,96 @@
+---
+/**
+ * A single themed gallery group: heading, optional caption paragraph,
+ * and a responsive CSS Grid of images wired for GLightbox.
+ *
+ * Usage:
+ *   <GallerySection
+ *     heading="Carports"
+ *     caption="Freistehende Carports…"
+ *     galleryGroup="carports"
+ *     images={[
+ *       { src: 'images/galerie/carport01.jpg', alt: 'Carport 1' },
+ *       …
+ *     ]}
+ *   />
+ *
+ * GLightbox is initialised once on galerie.astro via a <script> tag.
+ * The data-gallery attribute groups images so prev/next arrows stay
+ * within the same section.
+ */
+interface Image {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  heading: string;
+  caption?: string;
+  galleryGroup: string;
+  images: Image[];
+}
+
+const { heading, caption, images, galleryGroup } = Astro.props;
+---
+
+<section class="gallery-section">
+  <h3>{heading}</h3>
+  {caption && <p set:html={caption} />}
+  <div class="gallery-grid">
+    {images.map(img => (
+      <a
+        href={img.src}
+        class="glightbox"
+        data-gallery={galleryGroup}
+        data-description={img.alt}
+      >
+        <img src={img.src} alt={img.alt} loading="lazy" />
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .gallery-section {
+    margin-bottom: 2rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.625rem;
+  }
+
+  .gallery-grid a {
+    display: block;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: zoom-in;
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .gallery-grid img {
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                  filter 0.3s ease;
+    }
+    .gallery-grid a:hover img {
+      transform: scale(1.06);
+      filter: brightness(1.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+  }
+</style>
